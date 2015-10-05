@@ -1,9 +1,12 @@
-<h1>Hello from home</h1>
-{{home.test}}
+<div class="home">
+  <h1>Hello from home</h1>
+  {{home.test}}<br><br>
 
-<div id="home-header">
-  <greeting name="home.name"></greeting>
+  <div>
+    <greeting name="home.name"></greeting>
+  </div>
+
+  <button class="btn btn-primary" ng-click="home.changeName()">Change</button>
+  <button class="btn btn-danger" ng-click="home.randomName()">Random</button>
+
 </div>
-
-<button class="btn btn-primary" ng-click="home.changeName()">Change</button>
-<button class="btn btn-danger" ng-click="home.randomName()">Random</button>

@@ -1,4 +1,4 @@
-import './stylists.css';
+import './stylists.scss';
 
 import StylistsController from './stylists.controller';
 

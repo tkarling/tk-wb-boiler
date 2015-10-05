@@ -1,4 +1,4 @@
-import angular from 'angular';
+import './greeting.scss';
 
 function greeting() {
   return {
@@ -6,7 +6,7 @@ function greeting() {
     scope: {
       name: '='
     },
-    template: '<div>Directive: Hello, {{name}}</div>'
+    template: '<div class="greeting">Directive: Hello, {{name}}</div>'
   }
 }
 
