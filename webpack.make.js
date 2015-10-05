@@ -15,7 +15,6 @@ module.exports = function makeWebpackConfig (options) {
    */
   var BUILD = !!options.BUILD;
   var TEST = !!options.TEST;
-  BUILD = false;
 
   /**
    * Config
@@ -47,31 +46,33 @@ module.exports = function makeWebpackConfig (options) {
    */
   if (TEST) {
     config.output = {}
-  } else {
 
+  } else if (BUILD) {
+    config.output = {
+      // Absolute output directory
+      path: __dirname + '/dist',
+
+      // Output path from the view of the page
+      // Uses webpack-dev-server in development
+      publicPath: BUILD ? '/' : 'http://localhost:8080/',
+
+      // Filename for entry points
+      // Only adds hash in build mode
+      //filename: BUILD ? '[name].[hash].js' : '[name].bundle.js',
+      filename: BUILD ? '[name].[hash].js' : '[name].bundle.js',
+
+      // Filename for non-entry points
+      // Only adds hash in build mode
+      chunkFilename: BUILD ? '[name].[hash].js' : '[name].bundle.js'
+    }
+
+  } else { // from node
     config.output =  {
       path: path.resolve('client/build/'),
           publicPath: '/build/',
           filename: 'bundle.js'
     }
 
-    //config.output = {
-    //  // Absolute output directory
-    //  path: __dirname + '/dist',
-    //
-    //  // Output path from the view of the page
-    //  // Uses webpack-dev-server in development
-    //  publicPath: BUILD ? '/' : 'http://localhost:5000/',
-    //
-    //  // Filename for entry points
-    //  // Only adds hash in build mode
-    //  //filename: BUILD ? '[name].[hash].js' : '[name].bundle.js',
-    //  filename: BUILD ? '[name].[hash].js' : '[name].bundle.js',
-    //
-    //  // Filename for non-entry points
-    //  // Only adds hash in build mode
-    //  chunkFilename: BUILD ? '[name].[hash].js' : '[name].bundle.js'
-    //}
   }
 
   /**
@@ -224,15 +225,28 @@ module.exports = function makeWebpackConfig (options) {
    * Reference: http://webpack.github.io/docs/configuration.html#devserver
    * Reference: http://webpack.github.io/docs/webpack-dev-server.html
    */
-  config.devServer = {
-    contentBase: './client',
-    stats: {
-      modules: false,
-      cached: false,
-      colors: true,
-      chunk: false
-    }
-  };
+  if(BUILD || TEST) {
+    config.devServer = {
+      contentBase: './dist',
+      stats: {
+        modules: false,
+        cached: false,
+        colors: true,
+        chunk: false
+      }
+    };
+  } else {// from node
+    config.devServer = {
+      contentBase: './client',
+      stats: {
+        modules: false,
+        cached: false,
+        colors: true,
+        chunk: false
+      }
+    };
+
+  }
 
   return config;
 };
