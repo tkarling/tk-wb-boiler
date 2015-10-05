@@ -1,6 +1,7 @@
 'use strict';
 
 // Modules
+var path = require('path');
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer-core');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -14,6 +15,7 @@ module.exports = function makeWebpackConfig (options) {
    */
   var BUILD = !!options.BUILD;
   var TEST = !!options.TEST;
+  BUILD = false;
 
   /**
    * Config
@@ -21,6 +23,7 @@ module.exports = function makeWebpackConfig (options) {
    * This is the object where all configuration gets set
    */
   var config = {};
+  config.context = path.resolve('client');
 
   /**
    * Entry
@@ -32,7 +35,7 @@ module.exports = function makeWebpackConfig (options) {
     config.entry = {}
   } else {
     config.entry = {
-      app: './client/app.js'
+      app: './app.js'
     }
   }
 
@@ -45,22 +48,30 @@ module.exports = function makeWebpackConfig (options) {
   if (TEST) {
     config.output = {}
   } else {
-    config.output = {
-      // Absolute output directory
-      path: __dirname + '/dist',
 
-      // Output path from the view of the page
-      // Uses webpack-dev-server in development
-      publicPath: BUILD ? '/' : 'http://localhost:8080/',
-
-      // Filename for entry points
-      // Only adds hash in build mode
-      filename: BUILD ? '[name].[hash].js' : '[name].bundle.js',
-
-      // Filename for non-entry points
-      // Only adds hash in build mode
-      chunkFilename: BUILD ? '[name].[hash].js' : '[name].bundle.js'
+    config.output =  {
+      path: path.resolve('client/build/'),
+          publicPath: '/build/',
+          filename: 'bundle.js'
     }
+
+    //config.output = {
+    //  // Absolute output directory
+    //  path: __dirname + '/dist',
+    //
+    //  // Output path from the view of the page
+    //  // Uses webpack-dev-server in development
+    //  publicPath: BUILD ? '/' : 'http://localhost:5000/',
+    //
+    //  // Filename for entry points
+    //  // Only adds hash in build mode
+    //  //filename: BUILD ? '[name].[hash].js' : '[name].bundle.js',
+    //  filename: BUILD ? '[name].[hash].js' : '[name].bundle.js',
+    //
+    //  // Filename for non-entry points
+    //  // Only adds hash in build mode
+    //  chunkFilename: BUILD ? '[name].[hash].js' : '[name].bundle.js'
+    //}
   }
 
   /**
@@ -214,7 +225,7 @@ module.exports = function makeWebpackConfig (options) {
    * Reference: http://webpack.github.io/docs/webpack-dev-server.html
    */
   config.devServer = {
-    contentBase: './dist',
+    contentBase: './client',
     stats: {
       modules: false,
       cached: false,
