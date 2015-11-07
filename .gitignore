@@ -7,3 +7,7 @@ node_modules/*
 dist/*
 
 server/config/env/*
+
+.idea/jsLibraryMappings.xml
+
+.idea/tk-wb-boiler.iml
