@@ -2,24 +2,56 @@
 <html ng-app="app" lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.indigo-pink.min.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+              integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"
+              integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX"
+              crossorigin="anonymous">
+        <!--<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.indigo-pink.min.css">-->
+        <!--<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">-->
         <link href="./images/logo.jpg" rel="icon" type="image/x-icon"/>
-        <title>Angular App</title>
+        <title>Angular Bootstrap App</title>
         <base href="/">
     </head>
+
     <body>
-        <div class="index">
+        <div class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
 
-            <nav>
-                <a href="/">Home</a>
-                <a href="/stylists">Stylists</a>
-            </nav>
-
-            <ui-view></ui-view>
-            <script src="/dist/bundle.js"></script>
-
+                    <button ng-init="isCollapsed =true" class="navbar-toggle btn btn-navbar"
+                            ng-click="isCollapsed = !isCollapsed" data-target="#bs-example-navbar-collapse-1"
+                            aria-expanded="false">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Boiler</a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/">Home <span class="sr-only">(current)</span></a></li>
+                        <li><a href="/stylists">Stylists</a></li>
+                    </ul>
+                </div>
+                <div class="nav-collapse" uib-collapse="isCollapsed">
+                    <ul class="nav">
+                        <li><a href="/"><i class="icon-home icon-white"></i> Home</a>
+                        </li>
+                        <li><a href="/stylists">Stylists</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
+
+
+        <ui-view></ui-view>
+        <script src="/dist/bundle.js"></script>
+
     </body>
 </html>
