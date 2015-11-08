@@ -1,6 +1,6 @@
 //import './greeting.scss';
 
-function tkNavbar() {
+function tkNavbar($window) {
     return {
         restrict: 'E',
         scope: {
@@ -10,7 +10,7 @@ function tkNavbar() {
         template: '<div class="navbar navbar-default">' +
             '<div class="container-fluid">' +
                 '<div class="navbar-header">' +
-                    '<button ng-init="isCollapsed=true" class="navbar-toggle btn btn-navbar"' +
+                    '<button class="navbar-toggle btn btn-navbar"' +
                         'ng-click="isCollapsed = !isCollapsed" data-target="#bs-example-navbar-collapse-1"' +
                         'aria-expanded="false">' +
                         '<span class="icon-bar"></span>' +
@@ -19,28 +19,32 @@ function tkNavbar() {
                     '</button>' +
                     '<a class="navbar-brand" href="#">Boiler</a>' +
                 '</div>' +
-                '<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">' +
-                    '<ul class="nav navbar-nav">' +
-                        '<li ng-repeat="item in items" ng-class="{active: activeI === $index}" ng-click="updateActive($index)"><a href="{{item.link}}">{{item.name}}</a></li>' +
-                    '</ul>' +
-                '</div>' +
                 '<div class="nav-collapse" uib-collapse="isCollapsed">' +
-                    '<ul class="nav">' +
+                    '<ul class="nav navbar-nav">' +
                         '<li ng-repeat="itema in items" ng-click="closeMenu()"><a href="{{itema.link}}">{{itema.name}}</a></li>' +
                     '</ul>' +
                 '</div>' +
             '</div>' +
         '</div>',
         link: function(scope, element, attr) {
-            scope.activeI = 0;
-            //console.log("items", scope.items);
+            var COLLAPSE_WINDOW_WIDTH = 768;
+            scope.isCollapsed = $window.innerWidth < COLLAPSE_WINDOW_WIDTH;
 
-            //scope.$watch(() => {return scope.isCollapsed}, () => {
-            //   console.log("scope.isCollapsed", scope.isCollapsed);
-            //});
+            var w = angular.element($window);
+            w.bind('resize', function(){
+                //console.log("$window.resize", $window.innerWidth);
+                scope.$apply(function() {
+                    scope.isCollapsed = $window.innerWidth < COLLAPSE_WINDOW_WIDTH;
+                });
+            });
+
+            scope.$on("$destroy",function (){
+                console.log("on destroy");
+                w.unbind('resize');
+            });
 
             scope.closeMenu = () => {
-                scope.isCollapsed = true;
+                scope.isCollapsed = $window.innerWidth < COLLAPSE_WINDOW_WIDTH;
             }
             scope.updateActive = (index) => {
                 scope.activeI =index;
