@@ -7,7 +7,7 @@ function tkNavbar($window) {
             items: '='
         },
         //transclude: true,
-        template: '<div class="navbar navbar-default">' +
+        template: '<div class="navbar navbar-custom">' +
             '<div class="container-fluid">' +
                 '<div class="navbar-header">' +
                     '<button class="navbar-toggle btn btn-navbar"' +

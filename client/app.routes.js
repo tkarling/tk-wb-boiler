@@ -3,11 +3,11 @@ routes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
 export default function routes($stateProvider, $urlRouterProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
     $urlRouterProvider
-        .otherwise('/');
+        .otherwise('/home');
 
     $stateProvider
         .state('home', {
-            url: '/',
+            url: '/home',
             template: require('./features/home/home.html'),
             controller: 'HomeController',
             controllerAs: 'home'
@@ -17,5 +17,11 @@ export default function routes($stateProvider, $urlRouterProvider, $locationProv
             template: require('./features/stylists/stylists.html'),
             controller: 'StylistsController',
             controllerAs: 'stylists'
+        })
+        .state('practice', {
+            url: '/practice',
+            template: require('./features/practice/practice.html'),
+            controller: 'PracticeController',
+            controllerAs: 'practice'
         })
 }

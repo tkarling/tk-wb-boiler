@@ -1,0 +1,112 @@
+.practice {
+    // Navbar colors
+    $bgDefault      : #0080C6;
+    $bgHighlight    : #0080C6;
+    $colDefault     : #ecf0f1;
+    $colHighlight       : #99CCFF;
+
+    // other colors
+    $bgLightBlue: #27B7F7;
+    $bgContainer: #FBFBFB;
+
+    $padding: 12px;
+
+    .navbar-default {
+        background-color: $bgDefault;
+        background-image: none;
+        border-color: $bgHighlight;
+        .navbar-brand {
+            color: $colDefault;
+            &:hover, &:focus {
+                color: $colHighlight; }}
+        .navbar-text {
+            color: $colDefault; }
+        .navbar-nav {
+            > li {
+                > a {
+                    color: $colDefault;
+                    &:hover,  &:focus {
+                        color: $colHighlight; }}}
+            > .active {
+                > a, > a:hover, > a:focus {
+                    color: $colHighlight;
+                    background-color: $bgHighlight; }}
+            > .open {
+                > a, > a:hover, > a:focus {
+                    color: $colHighlight;
+                    background-color: $bgHighlight; }}}
+        .navbar-toggle {
+            border-color: $bgHighlight;
+            &:hover, &:focus {
+                background-color: $bgHighlight; }
+            .icon-bar {
+                background-color: $colDefault; }}
+        .navbar-collapse,
+        .navbar-form {
+            border-color: $colDefault; }
+        .navbar-link {
+            color: $colDefault;
+            &:hover {
+                color: $colHighlight; }}}
+    @media (max-width: 767px) {
+        .navbar-default .navbar-nav .open .dropdown-menu {
+            > li > a {
+                color: $colDefault;
+                &:hover, &:focus {
+                    color: $colHighlight; }}
+            > .active {
+                > a, > a:hover, > a:focus, {
+                    color: $colHighlight;
+                    background-color: $bgHighlight; }}}
+    }
+
+    .container {
+        background-color: $bgContainer;
+        margin-top: $padding;
+    }
+
+
+
+    img {
+        width: 200px;
+    }
+
+    .center-img {
+        display: table;
+        margin: $padding auto;
+    }
+
+    div {
+        //border: 1px dashed red;
+    }
+
+    .blue-line {
+        min-height: 20px;
+        padding: $padding/2;
+        background-color: $bgLightBlue;
+        color: white;
+        text-align: center;
+    }
+
+    .blue-line a {
+        color: white;
+    }
+
+    h1, .sub-header {
+        font-family: Avenir, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    h1 {
+        font-size: 2.3rem;
+    }
+
+    .sub-header {
+        font-size: 1.5rem;
+    }
+
+    .btn {
+        margin-top: $padding;
+        margin-bottom: $padding;
+    }
+
+}
